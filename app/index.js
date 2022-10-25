@@ -169,6 +169,7 @@ expressJSDocSwagger(app)(options);
  * @typedef {object} EncounterSent
  * @property {string} date - The date of encounter
  * @property {integer} tournament_id - the id of associated tournament  
+ * @property {integer} turn - the turn of the encounter is played in
  */
 
 /**
