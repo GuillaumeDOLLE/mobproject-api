@@ -82,10 +82,11 @@ RETURNING *;
 $$ LANGUAGE SQL STRICT;
 
 CREATE OR REPLACE FUNCTION create_encounter (json) RETURNS encounter AS $$
-INSERT INTO encounter ("date", tournament_id)
+INSERT INTO encounter ("date", tournament_id, turn)
 VALUES (
     ($1->>'date')::timestamptz,
-    ($1->>'tournament_id')::int
+    ($1->>'tournament_id')::int,
+    ($1->>'turn')::int
 )
 RETURNING *;
 $$ LANGUAGE SQL STRICT;
