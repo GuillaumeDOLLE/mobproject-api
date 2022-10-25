@@ -60,6 +60,12 @@ const userController = {
         
         // hash the password (https://www.npmjs.com/package/bcrypt)
         const hashedPassword = await encrypt(req.body.password);
+
+        const checkMail = await User.getUserByMail(req.body.mail);
+        if (checkMail) {
+            return res.status(500).json({ error: "Email déjà utilisé pour un autre utilisateur sur ce site" });
+        }
+
         // register new user
         const newUser = await User.create({
             firstname: req.body.firstname,
