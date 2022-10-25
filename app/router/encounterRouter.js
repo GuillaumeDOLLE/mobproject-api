@@ -14,12 +14,13 @@ const { authenticateToken } = require('../service/jwt');
  * @example response - 200 - response
  * {
  *        "id": 2,
-*         "winner": null,
-*         "loser": null,
-*         "date": "2022-08-28T12:04:51.931Z",
-*         "winner_score": 0,
-*         "loser_score": 0,
-*         "tournament_id": 1   
+ *        "winner": null,
+ *        "loser": null,
+ *        "date": "2022-08-28T12:04:51.931Z",
+ *        "winner_score": 0,
+ *        "loser_score": 0,
+ *        "turn": 1,
+ *        "tournament_id": 1   
  * }
  */
 // #endregion
@@ -42,6 +43,7 @@ router.post('/api/encounters',authenticateToken, encounterController.addEncounte
  *          "date": "2022-08-28T12:04:51.931Z",
  *          "winner_score": 0,
  *          "loser_score": 0,
+ *          "turn": 1,
  *          "tournament_id": 1
  * }
  * @example response - 404 - not found
@@ -70,6 +72,7 @@ router.get('/api/encounters/:id', encounterController.getEncounter);
  *           "date": "2022-08-28T12:04:51.931Z",
  *           "winner_score": 5,
  *           "loser_score": 4,
+ *           "turn": 1,
  *           "tournament_id": 1
  * }
  * @example response - 404 - not found
@@ -122,6 +125,7 @@ router.post('/api/encounters/:id/profiles', authenticateToken, encounterControll
  *          "date": "2022-08-28T12:04:51.931Z",
  *          "winner_score": 0,
  *          "loser_score": 0,
+ *          "turn": 1,
  *          "tournament_id": 1
  *      },
  *      {
@@ -131,6 +135,7 @@ router.post('/api/encounters/:id/profiles', authenticateToken, encounterControll
  *          "date": "2022-08-28T12:04:51.931Z",
  *          "winner_score": 0,
  *          "loser_score": 0,
+ *          "turn": 1,
  *          "tournament_id": 1
  *      },
  *      {
@@ -140,6 +145,7 @@ router.post('/api/encounters/:id/profiles', authenticateToken, encounterControll
  *          "date": "2022-08-28T12:04:51.931Z",
  *          "winner_score": 0,
  *          "loser_score": 0,
+ *          "turn": 1,
  *          "tournament_id": 1
  *      },
  *      {
@@ -149,6 +155,7 @@ router.post('/api/encounters/:id/profiles', authenticateToken, encounterControll
  *          "date": "2022-08-28T12:04:51.931Z",
  *          "winner_score": 0,
  *          "loser_score": 0,
+ *          "turn": 1,
  *          "tournament_id": 1
  *      },
  *      {
@@ -158,6 +165,7 @@ router.post('/api/encounters/:id/profiles', authenticateToken, encounterControll
  *          "date": "2022-08-28T12:04:51.931Z",
  *          "winner_score": 0,
  *          "loser_score": 0,
+ *          "turn": 2,
  *          "tournament_id": 1
  *      }
  * ]
