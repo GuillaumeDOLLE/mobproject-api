@@ -96,8 +96,7 @@ UPDATE encounter SET
     loser=$1->>'loser',
     "date"=($1->>'date')::timestamptz,
     winner_score=($1->>'winner_score')::int,
-    loser_score=($1->>'loser_score')::int,
-    "row"=($1->>'row')::int
+    loser_score=($1->>'loser_score')::int
     WHERE id = ($1->>'id')::int
     RETURNING *;
 $$ LANGUAGE SQL STRICT;
