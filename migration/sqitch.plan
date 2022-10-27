@@ -3,3 +3,5 @@
 
 1.init 2022-09-21T08:57:31Z spedata <mkarmensky@gmail.com> # initialization tables
 2.functions 2022-09-26T12:25:04Z Guillaume <g.dolle12@gmail.com> # Creation of SQL functions
+3.add_winner_tournament 2022-10-27T08:10:22Z Guillaume <g.dolle12@gmail.com> # add new field in tournament table for the winner
+4.modify_update_tournament 2022-10-27T08:21:47Z Guillaume <g.dolle12@gmail.com> # update the sql function to allow the request to modify the winner of a tournament

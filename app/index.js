@@ -119,6 +119,7 @@ expressJSDocSwagger(app)(options);
  * @property {integer} max_player_count - The maximum number of players in the tournament
  * @property {string} description - Informations about this tournament
  * @property {string} image - The picture of the tournament
+ * @property {string} winner - The nickname of the winner default null while the tournament is not finished
  * @property {integer} user_id -  The user_id of the user which created the tournament
 */
 
@@ -134,6 +135,7 @@ expressJSDocSwagger(app)(options);
  * @property {integer} max_player_count - The maximum number of players in the tournament
  * @property {string} description - Informations about this tournament
  * @property {string} image - The picture of the tournament
+ * @property {string} winner - The nickname of the winner
  * @property {integer} user_id -  The user_id of the user which created the tournament
 */
 

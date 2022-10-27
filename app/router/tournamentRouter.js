@@ -23,6 +23,7 @@ const { authenticateToken } = require('../service/jwt');
  *      "max_player_count": 128,
  *      "description": "lorem ipsum",
  *      "image": "image.com",
+ *      "winner": null
  *      "user_id": 153    
  * }
  */
@@ -48,6 +49,7 @@ router.post('/api/tournaments', authenticateToken, tournamentController.addTourn
  *      "max_player_count": 128,
  *      "description": "lorem ipsum",
  *      "image": "image.com",
+ *      "winner": "bobby",
  *      "user_id": 153
  *          
  *  },
@@ -61,6 +63,7 @@ router.post('/api/tournaments', authenticateToken, tournamentController.addTourn
  *      "max_player_count": 128,
  *      "description": "lorem ipsum",
  *      "image": "image.com",
+ *      "winner": "Jeanine",
  *      "user_id": 321
  *  },
  *  {
@@ -73,6 +76,7 @@ router.post('/api/tournaments', authenticateToken, tournamentController.addTourn
  *      "max_player_count": 128,
  *      "description": "lorem ipsum",
  *      "image": "image.com",
+ *      "winner": null,
  *      "user_id": 113
  *  }
  * ]
@@ -100,6 +104,7 @@ router.get('/api/tournaments', tournamentController.getAllTournaments);
  *      "max_player_count": 128,
  *      "description": "lorem ipsum",
  *      "image": "image.com",
+ *      "winner": "Paul",
  *      "user_id": 153
  * }
  * @example response - 404 - not found
@@ -131,6 +136,7 @@ router.get('/api/tournaments/:id', tournamentController.getTournament);
  *      "max_player_count": 128,
  *      "description": "lorem ipsum",
  *      "image": "image.com",
+ *      "winner": "someone"
  *      "user_id": 12
  * }
  * @example response - 403 - forbidden

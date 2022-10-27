@@ -21,7 +21,8 @@ const tournamentController = {
                 max_player_count: req.body.max_player_count,
                 description: req.body.description,
                 image: "https://i.imgur.com/XWdPSTS.png",
-                user_id: req.body.user_id,
+                winner: req.body.winner ?? null,
+                user_id: req.body.user_id
             });
             res.json(newTournament);  
         } catch (err) {
@@ -86,6 +87,7 @@ const tournamentController = {
                         max_player_count: req.body.max_player_count,
                         description: req.body.description,
                         image: 'https://i.imgur.com/XWdPSTS.png',
+                        winner: req.body.winner ?? null,
                         id: id
                     }
                     await Tournament.updateTournament(editedTournamentWithImageByDefault);
@@ -100,6 +102,7 @@ const tournamentController = {
                         max_player_count: req.body.max_player_count,
                         description: req.body.description,
                         image: req.body.image,
+                        winner: req.body.winner ?? null,
                         id: id
                     });
                     return res.json(editedTournament);

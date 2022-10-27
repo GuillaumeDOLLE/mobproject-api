@@ -13,6 +13,7 @@ class Tournament {
         this.max_player_count = obj.max_player_count,
         this.description = obj.description;
         this.image = obj.image;
+        this.winner = obj.winner;
         this.user_id = obj.user_id;
     }
 
