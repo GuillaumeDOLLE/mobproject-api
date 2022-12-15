@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS "user" (
     nickname text NOT NULL,
     mail text NOT NULL UNIQUE,
     "password" text NOT NULL,
-    trophies integer,
+    trophies integer NOT NULL DEFAULT 0,
     honor_point integer DEFAULT 0,
     avatar text,
     team text,
@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS encounter (
     "date" timestamptz NOT NULL,
     winner_score integer DEFAULT 0,
     loser_score integer DEFAULT 0,
+    turn integer DEFAULT 1,
     tournament_id integer NOT NULL REFERENCES "tournament"(id) ON DELETE CASCADE
 );
 

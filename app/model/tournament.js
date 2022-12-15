@@ -13,6 +13,7 @@ class Tournament {
         this.max_player_count = obj.max_player_count,
         this.description = obj.description;
         this.image = obj.image;
+        this.winner = obj.winner;
         this.user_id = obj.user_id;
     }
 
@@ -58,7 +59,7 @@ class Tournament {
      */
      static async updateTournament(infoTournament) {
         const result = await client.query('SELECT * FROM update_tournament ($1);', [infoTournament]);
-        return result.rows;
+        return result.rows[0];
     }
 
     /**
@@ -82,7 +83,18 @@ class Tournament {
 
     static async deleteUser(tournamentId, userId){
         const result = await client.query('DELETE FROM tournament_has_user WHERE tournament_id=$1 AND user_id=$2',[tournamentId, userId]);
+        return result.rows;
+    }
 
+    static async getTournamentsByUsers(userId){
+        // Get a list of tournaments which are created by this user_id or tournaments he's enrolled in
+        const result = await client.query('SELECT tournament.label, tournament.type, tournament.date, tournament.game, tournament.format, tournament.max_player_count, tournament.description, tournament.image, tournament.id, tournament.user_id FROM tournament_has_user JOIN public.user ON public.user.id = tournament_has_user.user_id FULL JOIN tournament ON tournament.id = tournament_has_user.tournament_id WHERE tournament.user_id = $1 OR tournament_has_user.user_id = $1 GROUP BY tournament.label, tournament.id, tournament.user_id;', [userId]);
+        return result.rows;
+    }
+
+    static async getUsersInEncounterInTournament(tournamentId){
+        // Get a list of users in 
+        const result = await client.query('SELECT DISTINCT user_has_encounter.user_id, public."user".nickname, user_has_encounter.encounter_id, tournament.id AS tournament_id FROM tournament JOIN encounter ON tournament.id = encounter.tournament_id JOIN user_has_encounter ON encounter.id = user_has_encounter.encounter_id JOIN public.user ON user_has_encounter.user_id = public.user.id JOIN tournament_has_user ON public.user.id = tournament_has_user.user_id WHERE tournament.id = $1 ORDER BY user_has_encounter.encounter_id ASC;', [tournamentId]);
         return result.rows;
     }
 }

@@ -47,7 +47,7 @@ class Encounter {
      */
     static async updateEncounter(infoEncounter) {
         const result = await client.query(`SELECT * FROM update_encounter ($1)`, [infoEncounter]);
-        return result.rows;
+        return result.rows[0];
     }
 
     /**
@@ -68,6 +68,16 @@ class Encounter {
     static async addUserToEncounter(userEncounterId){
         const result = await client.query('SELECT * FROM add_user_to_encounter ($1)', [userEncounterId]);
         return result.rows[0];
+    }
+    
+    /**
+     * get list of encounter by tournament Id
+     * @param {integer} tournamentId
+     * @returns {Array} encounters
+     */
+    static async getEncountersListByTournamentId(id){
+        const result = await client.query('SELECT * FROM encounter WHERE encounter.tournament_id=$1', [id]);
+        return result.rows;
     }
 
 
