@@ -72,13 +72,12 @@ class User {
      */
     static async patchUser(patchInfo) {
         const result = await client.query('SELECT * FROM update_user ($1);', [patchInfo]);
-        
-        return result.rows;
+        return result.rows[0];
     }
 
     static async patchPwd(pwd) {
         const result = await client.query('SELECT * FROM update_pwd ($1);', [pwd]);
-        return result.rows;
+        return result.rows[0];
     }
 
     /**
@@ -99,6 +98,36 @@ class User {
     static async removeOneHonorPoint(userId) {
         return await client.query('UPDATE public."user" SET honor_point = honor_point - 1 WHERE id = $1;', [userId]);
     }
+
+    static async addOneTrophy(userId) {
+        return await client.query('UPDATE public."user" SET trophies = trophies +1 WHERE id = $1;', [userId]);
+    }
+
+    static async getTournamentListByUserId(id) {
+        const result= await client.query('SELECT DISTINCT user_has_encounter.user_id, tournament_has_user.tournament_id, tournament.user_id AS moderator_id FROM user_has_encounter JOIN tournament_has_user ON tournament_has_user.user_id = user_has_encounter.user_id JOIN tournament ON tournament_has_user.tournament_id = tournament.id WHERE tournament_has_user.user_id = $1', [id]);
+        return result.rows;
+    }
+
+    static async mostTrophiesLeaderboard(){
+        const result = await client.query('SELECT * FROM public.user ORDER BY public.user.trophies DESC LIMIT 15;')
+        return result.rows;
+    }
+
+    static async mostHonorLeaderboard(){
+        const result = await client.query('SELECT * FROM public.user ORDER BY public.user.honor_point DESC LIMIT 15;')
+        return result.rows;
+    }
+
+    static async lessHonorLeaderboard(){
+        const result = await client.query('SELECT * FROM public.user ORDER BY public.user.honor_point ASC LIMIT 15;')
+        return result.rows;
+    }
+
+    static async lastsubLeaderboard(){
+        const result = await client.query('SELECT * FROM public.user ORDER BY public.user.id DESC Limit 15;')
+        return result.rows;
+    }
+
 
 };
 

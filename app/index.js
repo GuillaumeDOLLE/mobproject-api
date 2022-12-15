@@ -43,7 +43,7 @@ const options = {
             scheme: "bearer"
         }
     },
-    swaggerUIPath: "/api-docs", // URL where SwaggerUI will be rendered
+    swaggerUIPath: "/", // URL where SwaggerUI will be rendered
     baseDir: __dirname, // Base directory which we use to locate your JSDOC files
     filesPattern: "./**/*.js", // Global pattern to find our jsdoc files (multiple patterns can be added in an array)
     exposeSwaggerUI: true // Expose OpenAPI UI
@@ -80,6 +80,15 @@ expressJSDocSwagger(app)(options);
 */
 
 /**
+ * An edited user
+ * @typedef {object} EditedUser
+ * @property {string} firstname - The firstname to edit
+ * @property {string} lastname - The lastname to edit
+ * @property {string} nickname - The nickname
+ * @property {string} avatar - The profile picture
+ */
+
+/**
  * A User who wants to login
  * @typedef {object} Guest
  * @property {string} mail - The email
@@ -110,6 +119,7 @@ expressJSDocSwagger(app)(options);
  * @property {integer} max_player_count - The maximum number of players in the tournament
  * @property {string} description - Informations about this tournament
  * @property {string} image - The picture of the tournament
+ * @property {string} winner - The nickname of the winner default null while the tournament is not finished
  * @property {integer} user_id -  The user_id of the user which created the tournament
 */
 
@@ -125,6 +135,7 @@ expressJSDocSwagger(app)(options);
  * @property {integer} max_player_count - The maximum number of players in the tournament
  * @property {string} description - Informations about this tournament
  * @property {string} image - The picture of the tournament
+ * @property {string} winner - The nickname of the winner
  * @property {integer} user_id -  The user_id of the user which created the tournament
 */
 
@@ -142,14 +153,30 @@ expressJSDocSwagger(app)(options);
  */
 
 /**
+ * A tournament with his label, id, and moderator (user_id)
+ * @typedef {object} TournamentByUserId
+ * @property {string} label - The label of the tournament
+ * @property {integer} id - The id of the tournament
+ * @property {integer} user_id - the id of the user who created the tournament
+ */
+
+/**
  * Error 404
  * @typedef {object} Error404
  * @property {string} error - the error
  */
 
 /**
- * A encounter
- * @typedef {object} Encounter
+ * An encounter sent
+ * @typedef {object} EncounterSent
+ * @property {string} date - The date of encounter
+ * @property {integer} tournament_id - the id of associated tournament  
+ * @property {integer} turn - the turn of the encounter is played in
+ */
+
+/**
+ * An encounter returned
+ * @typedef {object} EncounterReturned
  * @property {integer} id - The id of the encounter
  * @property {string} winner - The nickname of the winner
  * @property {string} loser - The nickname of the loser
@@ -157,6 +184,16 @@ expressJSDocSwagger(app)(options);
  * @property {integer} winner_score - The score of the winner
  * @property {integer} loser_score - The score of the loser
  * @property {integer} tournament_id - the id of associated tournament  
+ */
+
+/**
+ * An encounter edited
+ * @typedef {object} EncounterEdited
+ * @property {string} winner - The nickname of the winner
+ * @property {string} loser - The nickname of the loser
+ * @property {string} date - The date of encounter
+ * @property {integer} winner_score - The score of the winner
+ * @property {integer} loser_score - The score of the loser  
  */
 
 /**
@@ -170,6 +207,14 @@ expressJSDocSwagger(app)(options);
  * A encounter_has_user
  * @typedef {object} UserEncounter
  * @property {integer} user_id - The id of the user
+ */
+
+/**
+ * A List of Tournament_id with encounter_id contain user_id
+ * @typedef {object} TournamentWithEncounterWithUser
+ * @property {integer} user_id - The id of the user
+ * @property {integer} encounter_id - The id of the encounter
+ * @property {integer} tournament_id - The id of the tournament
  */
 
 // #endregion
